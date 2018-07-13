@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "SMACC project - backend",
+  "description": "Mr Sandwich - backend",
   "main": "server.js",
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
