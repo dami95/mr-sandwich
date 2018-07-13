@@ -17,6 +17,9 @@ app.listen(port, () => {
     console.log('Backend is ready on localhost:' + port);
 });
 
+app.get('/', (req, res) => {
+    res.send('Hello, backend is working!');
+});
 app.post('/mailgun', (req, res) => {
     let data = prepareData(req.body);
 
