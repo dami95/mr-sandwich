@@ -8,5 +8,7 @@ module.exports = (data) => {
        }
     });
 
+    //@TODO we can also verify that in fields: to, cc, bcc are correct e-mail addresses
+
     return dataToSend;
 };

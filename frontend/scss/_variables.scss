@@ -1,0 +1,12 @@
+$bg-color: #fafafa;
+$bg-hover-color: darken($bg-color, 2%);
+$bg-active-color: darken($bg-color, 6%);
+$border-color: darken($bg-color, 10%);
+$accent-color: #5490ca;
+$additional-information: darken(#eaeaea, 20%);
+
+$success-color: green;
+$error-color: red;
+
+$header-height: 4rem;
+$footer-height: 4rem;

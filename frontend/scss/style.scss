@@ -1,0 +1,220 @@
+@import 'reset';
+@import 'variables';
+@import 'layout';
+
+body, input[type="text"], textarea {font: 300 16px 'Montserrat', sans-serif;}
+h1, h2, h3 {font-weight: 300;}
+a {color: $accent-color;}
+
+%transition {transition: 0.1s all;}
+%clear-appearance {
+  &, &:focus, &:active {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+#recipients {
+  h3 {
+    position: relative;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-bottom: 1px solid $border-color;
+
+    a {
+      position: absolute;
+      right: 0.7rem;
+    }
+  }
+
+  ul.recipients-list {
+    padding-bottom: calc(#{$footer-height} + 2px);
+
+    li {
+      position: relative;
+      font-size: 1rem;
+      padding: 0.444em;
+      border-bottom: 1px solid $border-color;
+      cursor: pointer;
+      @extend %transition;
+
+      &.no-data {
+        padding: 2em;
+        text-align: center;
+        font-weight: 400;
+      }
+
+      i.first-icon {
+        display: inline-block;
+        font-size: 0.7rem;
+        width: 1rem;
+        position: relative;
+        top: -0.1rem;
+      }
+      .name,
+      .email {
+        position: absolute;
+        @extend %transition;
+      }
+
+      .email {
+        color: $accent-color;
+        opacity: 0;
+        font-size: 0.75rem;
+        line-height: 1.3rem;
+
+        &:before {
+          content: '<';
+        }
+        &:after {
+          content: '>';
+        }
+      }
+
+      .checked-icon {
+        position: absolute;
+        top: 0.6rem;
+        right: 0.6rem;
+
+        &.fa-check-square {
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        background: $bg-hover-color;
+
+        .name {
+          opacity: 0;
+        }
+        .email {
+          opacity: 1;
+          font-weight: 400;
+        }
+
+        .checked-icon {
+          &.fa-square {
+            opacity: 0;
+          }
+
+          &.fa-check-square {
+            opacity: 1;
+          }
+        }
+      }
+
+      &.active {
+        background: $bg-active-color;
+
+        .checked-icon {
+          &.fa-square {
+            opacity: 0;
+          }
+
+          &.fa-check-square {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+#message {
+  position: fixed;
+  left: 25%;
+  top: 0;
+
+  form {
+    background: #FFF;
+
+    input#subject,
+    textarea#content {
+      @extend %clear-appearance;
+    }
+
+    input#subject {
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid $border-color;
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 1rem;
+    }
+
+    textarea#content {
+      box-sizing: border-box;
+      border: 0;
+      padding: 1rem;
+      height: calc(100vh - #{$header-height + 2*$footer-height} );
+      width: 100%;
+      resize: none;
+    }
+
+    footer {
+      height: $footer-height;
+      border-top: 1px solid $border-color;
+      background: #FFF;
+      width: 100%;
+      display: flex;
+
+      #send {
+        @extend %clear-appearance;
+
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid $accent-color;
+        border-radius: 1rem;
+        color: $accent-color;
+        font-size: 1rem;
+        padding: 0 2rem;
+        margin: 0.5rem;
+        height: $footer-height - 1rem;
+
+        @media only screen and (max-width: 500px) {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        i {
+          font-size: 1rem;
+          padding-left: 0.25rem;
+        }
+      }
+
+      #result {
+        line-height: $footer-height;
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+
+        &.success {
+          color: $success-color;
+        }
+        &.info {
+          color: $additional-information;
+        }
+        &.error {
+          color: $error-color;
+        }
+      }
+
+      p {
+        line-height: $footer-height;
+        margin: 1rem 0.5rem 0 auto;
+        text-align: right;
+        color: $additional-information;
+        font-size: 0.7rem;
+
+        @media only screen and (max-width: 650px) {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -124,6 +124,6 @@ describe('test sending e-mails', function() {
     }).timeout(2000); //sendgrid reply normally about 500ms
 });
 
-//there should be test about restapi for example
+//@TODO there should be test about restapi for example
 //run backend
 //send post data by http and verify results

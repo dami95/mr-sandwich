@@ -16,6 +16,6 @@
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha test/test.js"
   },
-  "author": "",
+  "author": "Damian Lewita",
   "license": "ISC"
 }
