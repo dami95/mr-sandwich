@@ -1,5 +1,5 @@
 window.Message = {
-    init: (form, list) => {
+    init: (api, form, list) => {
         var self = {};
 
         self.handleButton = () => {
@@ -54,7 +54,6 @@ window.Message = {
 
                 promisses.push(promise);
             });
-
             //@TODO Promise.all(promisses)
             //.then() showSuccess
             //.then() showError

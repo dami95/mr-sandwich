@@ -4,7 +4,7 @@ window.Api = {
         var url = 'http://localhost:8000';
 
         self.loadRecipients = () => {
-            //there should be function that load data from rest server
+            //@TODO there should be function that load data from restapi
             var recipients = [];
             var n = 5;
 
@@ -20,11 +20,27 @@ window.Api = {
         }
 
         self.randomMailProvider = () => {
-            if (Math.rand())
+            if (Math.random() > 0.5) {
+                return url + '/' + 'mailgun';
+            } else {
+                return url + '/' + 'sendgrid';
+            }
         }
+
         self.sendMessage = (recipient, subject, content) => {
-            //
-            //send data to
+            var mailUrl = self.randomMailProvider();
+
+            var data = {
+                from: 'example@example.com', //@TODO it should be customizable by user
+                to: recipients,
+                subject,
+                text: content
+            }
+
+            //@TODO send data to mailUrl
+            //return Promise
+            //handle success - resolve() promise
+            //handle error - try again to get random e-mail provider and send e-mail
         }
 
 
@@ -39,6 +55,7 @@ window.App = {
         var message = Message.init(api, form, list);
     }
 };
+
 
 document.addEventListener('DOMContentLoaded', App.init);
 window.Form = {
@@ -146,7 +163,7 @@ window.List = {
     }
 }
 window.Message = {
-    init: (form, list) => {
+    init: (api, form, list) => {
         var self = {};
 
         self.handleButton = () => {
@@ -174,23 +191,39 @@ window.Message = {
         self.showError = (content) => {
             var resultElement = form.getResultElement();
             resultElement.classList.remove('success');
+            resultElement.classList.remove('info');
             resultElement.classList.add('error');
+            resultElement.innerHTML = content;
+        }
+        self.showInfo = (content) => {
+            var resultElement = form.getResultElement();
+            resultElement.classList.remove('error');
+            resultElement.classList.remove('success');
+            resultElement.classList.add('info');
             resultElement.innerHTML = content;
         }
         self.showSuccess = (content) => {
             var resultElement = form.getResultElement();
             resultElement.classList.remove('error');
+            resultElement.classList.remove('info');
             resultElement.classList.add('success');
             resultElement.innerHTML = content;
         }
         self.sendMessages = (recipients) => {
+            self.showInfo('Messages are being sent right now.');
+
+            var promisses = [];
             recipients.forEach((recipient) => {
-                api.sendMessage(recipient, subject, content)
+                var promise = api.sendMessage(recipient, subject, content);
+
+                promisses.push(promise);
             });
+            //@TODO Promise.all(promisses)
+            //.then() showSuccess
+            //.then() showError
         }
 
         self.handleButton();
-
 
         return self;
     }
